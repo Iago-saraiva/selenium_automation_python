@@ -26,7 +26,7 @@ class TestAutomation(unittest.TestCase):
         
         
         cls.base_dir = os.path.dirname(os.path.abspath(__file__))
-        cls.login_url = f"file://{cls.base_dir}/login.html"
+        cls.index_url = f"file://{cls.base_dir}/index.html"
         cls.data_url = f"file://{cls.base_dir}/data-page.html"
 
     def _slow_down(self):
@@ -39,12 +39,12 @@ class TestAutomation(unittest.TestCase):
             print("\nExecutando teste de login...")
             
             self._slow_down()
-            self.driver.get(self.login_url)
+            self.driver.get(self.index_url)
             print(f"Página carregada: {self.driver.current_url}")
             self._slow_down()
             
             
-            self.assertIn("login.html", self.driver.current_url)
+            self.assertIn("index.html", self.driver.current_url)
             
             username = self.wait.until(
                 EC.visibility_of_element_located((By.ID, "username"))
