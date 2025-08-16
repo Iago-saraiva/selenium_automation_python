@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabela de Dados</title>
+    <style>
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <h1>Tabela de Dados</h1>
+    <table id="data-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Cargo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>João Silva</td>
+                <td>joao@123.com</td>
+                <td>Desenvolvedor</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Maria Souza</td>
+                <td>maria@e123.com</td>
+                <td>Analista</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Carlos Oliveira</td>
+                <td>carlos@123.com</td>
+                <td>Gerente</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        if(!localStorage.getItem('authenticated')) {
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+</html>
