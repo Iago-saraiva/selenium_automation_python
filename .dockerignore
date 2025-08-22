@@ -1,0 +1,16 @@
+.git
+.gitignore
+Dockerfile
+.dockerignore
+.env
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+venv/
+.DS_Store
+chromedriver.log
+test-reports/
+extracted_data.csv 
+*.png 

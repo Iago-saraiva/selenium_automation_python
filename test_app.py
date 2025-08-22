@@ -2,6 +2,7 @@ import unittest
 import csv
 import os
 import time 
+import uuid
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -13,19 +14,21 @@ class TestAutomation(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         options = webdriver.ChromeOptions()
+        options.add_argument("--headless")  
         options.add_argument("--disable-extensions")
         options.add_argument("--disable-gpu")
         options.add_argument("--no-sandbox")
         options.add_argument("--disable-dev-shm-usage")
         options.add_argument("--window-size=1920,1080")
         
+        unique_user_data_dir = f"/tmp/chrome_{uuid.uuid4().hex}"
+        options.add_argument(f"--user-data-dir={unique_user_data_dir}")
         
         cls.driver = webdriver.Chrome(options=options)
         cls.wait = WebDriverWait(cls.driver, 20)  
         cls.delay = 2 
         
-        
-        cls.base_dir = os.path.dirname(os.path.abspath(__file__))
+        cls.base_dir = "/app"
         cls.index_url = f"file://{cls.base_dir}/index.html"
         cls.data_url = f"file://{cls.base_dir}/data-page.html"
 
@@ -85,7 +88,19 @@ class TestAutomation(unittest.TestCase):
             print("\nExecutando teste de extração de dados...")
             self._slow_down()
             
-            self.test_01_login()
+            self.driver.get(self.index_url)
+            self._slow_down()
+            
+            username = self.wait.until(EC.visibility_of_element_located((By.ID, "username")))
+            username.send_keys("test_user")
+            self._slow_down()
+            
+            password = self.driver.find_element(By.ID, "password")
+            password.send_keys("secure_password")
+            self._slow_down()
+            
+            login_btn = self.driver.find_element(By.ID, "login-btn")
+            login_btn.click()
             self._slow_down()
             
             self.driver.get(self.data_url)
